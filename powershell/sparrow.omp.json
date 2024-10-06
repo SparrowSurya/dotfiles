@@ -10,7 +10,8 @@
       "alignment": "left",
       "segments": [
         {
-          "foreground": "#2ac3de",
+          "background": "#24273a",
+          "foreground": "#7dc4e4",
           "properties": {
             "alpine": "\uf300",
             "arch": "\uf303",
@@ -29,40 +30,65 @@
             "windows": "\ue70f"
           },
           "style": "diamond",
-          "trailing_diamond": "",
-          "template": " {{ .Icon }} ",
+          "template": "<#24273a,#1e1e2e></>{{ .Icon }} ",
           "type": "os"
         },
         {
-          "background": "#24283b",
-          "foreground": "#f7768e",
+          "background": "#24273a",
+          "foreground": "#b7bdf8",
           "style": "diamond",
+          "trailing_diamond": "<#24273a></>",
           "template": " {{ .UserName }} ",
           "type": "session"
         },
         {
-          "background": "#24283b",
-          "foreground": "#e0af68",
+          "foreground": "#242424",
+          "background": "#2ac3de",
           "style": "diamond",
+          "leading_diamond": "<#2ac3de></>",
           "properties": {
-            "time_format": "Jan 2, Mon at 3:04 PM"
+            "home_icon": " ",
+            "folder_icon": "",
+            "folder_separator_icon": "/",
+            "style": "folder"
           },
-          "template": " {{ .CurrentDate | date .Format }} ",
-          "type": "time"
+          "template": "{{ .Path }} ",
+          "type": "path"
         },
         {
           "type": "git",
-          "background": "#24283b",
-          "foreground": "#7aa2f7",
+          "background": "#c6a0f6",
+          "foreground": "#24273a",
           "style": "diamond",
-          "template": " {{ .HEAD }}{{if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }}  {{ .Working.String }}{{ end }}{{ if and (.Staging.Changed) (.Working.Changed) }} |{{ end }}{{ if .Staging.Changed }}  {{ .Staging.String }}{{ end }} ",
+          "leading_diamond": "<#2ac3de></>",
+          "template": " {{ .HEAD }} ",
           "properties": {
-            "branch_icon": "  ",
+            "branch_icon": " ",
             "fetch_stash_count": true,
             "fetch_status": true,
             "fetch_upstream_icon": true,
             "fetch_worktree_count": true
           }
+        },
+        {
+          "type": "python",
+          "foreground": "#242424",
+          "background": "#ee99a0",
+          "template": " Venv ",
+          "style": "diamond",
+          "leading_diamond": "<#c6a0f6></>"
+        },
+        {
+          "background": "#f5bde6",
+          "foreground": "#242424",
+          "style": "diamond",
+          "leading_diamond": "<#ee99a0></>",
+          "trailing_diamond": "",
+          "properties": {
+            "time_format": "3:04 PM"
+          },
+          "template": "  {{ .CurrentDate | date .Format }} ",
+          "type": "time"
         }
       ]
     },
@@ -70,8 +96,8 @@
       "alignment": "right",
       "segments": [
         {
-          "foreground": "#cfc9c2",
-          "background": "#1a1b26",
+          "foreground": "#b7bdf8",
+          "background": "#24273a",
           "style": "diamond",
           "leading_diamond": " ",
           "trailing_diamond": "",
@@ -83,15 +109,15 @@
           "type": "executiontime"
         },
         {
-          "background": "#1a1b26",
+          "background": "#24273a",
           "style": "diamond",
           "leading_diamond": " ",
           "trailing_diamond": "",
           "type": "battery",
           "foreground_templates": [
-            "{{if eq \"Charging\" .State.String}}#CCFF00{{end}}",
-            "{{if eq \"Discharging\" .State.String}}#FC4C02{{end}}",
-            "{{if eq \"Full\" .State.String}}#FFEF00{{end}}"
+            "{{ if eq \"Charging\" .State.String }} #a6da95 {{ end }}",
+            "{{ if eq \"Discharging\" .State.String }} #ee99a0 {{ end }}",
+            "{{ if eq \"Full\" .State.String }} #91d7e3 {{ end }}"
           ],
           "template": " {{ if not .Error }}{{ .Icon }} {{ .Percentage }}%{{ end }} ",
           "properties": {
@@ -101,8 +127,8 @@
           }
         },
         {
-          "foreground": "#8eff14",
-          "background": "#1a1b26",
+          "foreground": "#b7bdf8",
+          "background": "#24273a",
           "style": "diamond",
           "leading_diamond": " ",
           "trailing_diamond": "",
@@ -110,8 +136,8 @@
           "type": "sysinfo"
         },
         {
-          "foreground": "#43CCEA",
-          "background": "#1a1b26",
+          "foreground": "#b7bdf8",
+          "background": "#24273a",
           "style": "diamond",
           "leading_diamond": " ",
           "trailing_diamond": "",
@@ -127,49 +153,11 @@
       "alignment": "left",
       "segments": [
         {
-          "foreground": "#FBD951",
-          "template": "   ",
-          "type": "text"
-        },
-        {
-          "foreground": "#242424",
-          "background": "#2ac3de",
           "style": "diamond",
-          "leading_diamond": "<#24283b,background></>",
-          "trailing_diamond": "",
-          "properties": {
-            "home_icon": " ",
-            "folder_icon": "",
-            "folder_separator_icon": "/",
-            "style": "folder"
-          },
-          "template": " {{ .Path }} ",
-          "type": "path"
-        },
-        {
-          "type": "python",
-          "foreground": "#242424",
-          "background": "#FFE873",
-          "template": " Venv ",
-          "style": "diamond",
-          "leading_diamond": "<#24283b,background></>",
-          "trailing_diamond": ""
-        },
-        {
-          "background": "#45e83f",
-          "background_templates": [
-            "{{ if gt .Code 0 }}#FF033E{{ end }}"
-          ],
-          "foreground_templates": [
-            "{{ if gt .Code 0 }}#dcdfe4{{ end }}"
-          ],
-          "foreground": "#242424",
-          "powerline_symbol": "\ue0b0",
+          "template": "{{ if gt .Code 0 }} <#ed8796></> {{ else }} <#a6da95></#> {{end}}",
           "properties": {
             "always_enabled": true
           },
-          "style": "powerline",
-          "template": " 󱥶 ",
           "type": "exit"
         }
       ]
