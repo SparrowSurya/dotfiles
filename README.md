@@ -1,2 +1,3 @@
-# configs
-configuration files
+# dotfiles
+custom configuration files
+
