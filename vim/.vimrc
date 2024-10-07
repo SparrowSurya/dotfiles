@@ -91,6 +91,9 @@ Plug 'vim-airline/vim-airline-themes'
 " nerd tree
 Plug 'preservim/nerdtree'
 
+" nerd commenter
+Plug 'preservim/nerdcommenter'
+
 " catppuccin theme
 Plug 'catppuccin/vim', { 'as': 'catppuccin' }
 
@@ -107,3 +110,17 @@ let g:airline_theme='onedark'
 
 " nerd tree
 nnoremap <C-n> :NERDTreeToggle<CR>
+
+" nerd commenter
+let g:NERDCreateDefaultMappings = 0
+let g:NERDSpaceDelims = 1
+let g:NERDCompactSexyComs = 1
+let g:NERDDefaultAlign = 'left'
+let g:NERDCustomDelimiters = { 'c': { 'left': '/**','right': '*/' } }
+let g:NERDTrimTrailingWhitespace = 1
+let g:NERDCommentEmptyLines = 0
+let g:NERDToggleCheckAllLines = 1
+
+nnoremap <silent> <leader>/ :call nerdcommenter#Comment('n', 'toggle')<CR>
+vnoremap <silent> <leader>/ :call nerdcommenter#Comment('n', 'toggle')<CR>
+
