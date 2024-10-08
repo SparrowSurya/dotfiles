@@ -94,6 +94,9 @@ Plug 'preservim/nerdtree'
 " nerd commenter
 Plug 'preservim/nerdcommenter'
 
+" bufline
+Plug 'ap/vim-buftabline'
+
 " catppuccin theme
 Plug 'catppuccin/vim', { 'as': 'catppuccin' }
 
@@ -116,11 +119,59 @@ let g:NERDCreateDefaultMappings = 0
 let g:NERDSpaceDelims = 1
 let g:NERDCompactSexyComs = 1
 let g:NERDDefaultAlign = 'left'
-let g:NERDCustomDelimiters = { 'c': { 'left': '/**','right': '*/' } }
 let g:NERDTrimTrailingWhitespace = 1
 let g:NERDCommentEmptyLines = 0
 let g:NERDToggleCheckAllLines = 1
 
+" ----------------------------------------------------------------
+" keybindings
+" ----------------------------------------------------------------
+
+" move between buffer
+nnoremap <silent> <S-Tab> :bprevious<CR>
+nnoremap <silent> <Tab> :bnext<CR>
+
+" save buffer
+nnoremap <silent> <C-s> :w!<CR>
+
+" move lines
+nnoremap <silent> <M-Up> :m .-2<CR>==
+nnoremap <silent> <M-Down> :m .+1<CR>==
+vnoremap <silent> <M-Up> :m '<-2<CR>gv=gv
+vnoremap <silent> <M-Down> :m '>+1<CR>gv=gv
+
+" toggle case
+nnoremap <silent> <leader>t viw~`[
+vnoremap <silent> <leader>t ~
+
+" toggle comment
 nnoremap <silent> <leader>/ :call nerdcommenter#Comment('n', 'toggle')<CR>
 vnoremap <silent> <leader>/ :call nerdcommenter#Comment('n', 'toggle')<CR>
+
+" base conversion
+nnoremap <silent> <leader>dx :s/\<\d\+\>/\=printf("0x%X", str2nr(submatch(0)))<CR>:nohlsearch<CR>
+nnoremap <silent> <leader>db :s/\<\d\+\>/\=printf("0b%b", str2nr(submatch(0)))<CR>:nohlsearch<CR>
+nnoremap <silent> <leader>hx :s/\<0x\x\+\>/\=str2nr(submatch(0), 16)<CR>:nohlsearch<CR>
+nnoremap <silent> <leader>bx :s/\<0b[01]\+\>/\=str2nr(submatch(0), 2)<CR>:nohlsearch<CR>
+
+vnoremap <silent> <leader>dx :s/\%V\d\+/\=printf("0x%X", str2nr(submatch(0)))<CR>:nohlsearch<CR>
+vnoremap <silent> <leader>db :s/\%V\d\+/\=printf("0b%b", str2nr(submatch(0)))<CR>:nohlsearch<CR>
+vnoremap <silent> <leader>hx :s/\%V0x\x\+/\=str2nr(submatch(0), 16)<CR>:nohlsearch<CR>
+vnoremap <silent> <leader>bx :s/\%V0b[01]\+/\=str2nr(submatch(0), 2)<CR>:nohlsearch<CR>
+
+" create split
+nnoremap <leader>sv :vsplit<CR>
+nnoremap <leader>sh :split<CR>
+
+" move between splits
+nnoremap <C-Left> <C-w>h
+nnoremap <C-Down> <C-w>j
+nnoremap <C-Up> <C-w>k
+nnoremap <C-Right> <C-w>l
+
+" resize splits
+noremap <S-Left> :vertical resize -1<CR>
+noremap <S-Right> :vertical resize +1<CR>
+noremap <S-Up> :resize -1<CR>
+noremap <S-Down> :resize +1<CR>
 
