@@ -17,6 +17,8 @@ set showmatch         " show matches on parens, brackets, etc.
 " set ruler           " display colored column
 " set colorcolumn=72  " column to color
 set guicursor=n-c-v:block-nCursor
+set listchars=space:.,tab:\|. " show . character to show spaces
+set list			  " render the chars list
 
 " ----------------------------------------------------------------
 " swap file
@@ -49,7 +51,7 @@ set mouse=a           " enable mouse click
 " ----------------------------------------------------------------
 " colors & syntax
 " ----------------------------------------------------------------
-filetype on
+filetype plugin indent on
 syntax on
 colorscheme gruvbox
 " colorscheme catppuccin_macchiato
@@ -88,6 +90,9 @@ call plug#begin()
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
+" coc-vim
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
 " nerd tree
 Plug 'preservim/nerdtree'
 
@@ -99,6 +104,9 @@ Plug 'ap/vim-buftabline'
 
 " catppuccin theme
 Plug 'catppuccin/vim', { 'as': 'catppuccin' }
+
+" rustfmt
+Plug 'rust-lang/rust.vim'
 
 call plug#end()
 
@@ -122,6 +130,22 @@ let g:NERDDefaultAlign = 'left'
 let g:NERDTrimTrailingWhitespace = 1
 let g:NERDCommentEmptyLines = 0
 let g:NERDToggleCheckAllLines = 1
+
+" rustfmt
+let g:rustfmt_autosave = 1
+
+" coc
+inoremap <silent><expr> <CR> pumvisible() ? coc#_select_confirm() : "\<CR>"
+inoremap <silent><expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+
+" coc-pyright: https://github.com/fannheyward/coc-pyright
+autocmd FileType python let b:coc_root_patterns = ['venv', '.venv', '.git']
+
+" coc-rust-analyzer: https://github.com/fannheyward/coc-rust-analyzer
+
+" coc-clangd: https://github.com/clangd/coc-clangd
+" project setup: https://clangd.llvm.org/installation.html#project-setup
+
 
 " ----------------------------------------------------------------
 " keybindings
