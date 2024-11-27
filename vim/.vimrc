@@ -17,8 +17,9 @@ set showmatch         " show matches on parens, brackets, etc.
 " set ruler           " display colored column
 " set colorcolumn=72  " column to color
 set guicursor=n-c-v:block-nCursor
-set listchars=space:.,tab:\|. " show . character to show spaces
+set listchars=space:.,tab:\│. " show . character to show spaces
 set list			  " render the chars list
+" set signcolumn=yes  " Always show the sign column
 
 " ----------------------------------------------------------------
 " swap file
@@ -154,6 +155,7 @@ autocmd FileType python let b:coc_root_patterns = ['venv', '.venv', '.git']
 " move between buffer
 nnoremap <silent> <S-Tab> :bprevious<CR>
 nnoremap <silent> <Tab> :bnext<CR>
+nnoremap <silent> <leader>x :bd<CR>
 
 " save buffer
 nnoremap <silent> <C-s> :w!<CR>
@@ -173,15 +175,15 @@ nnoremap <silent> <leader>/ :call nerdcommenter#Comment('n', 'toggle')<CR>
 vnoremap <silent> <leader>/ :call nerdcommenter#Comment('n', 'toggle')<CR>
 
 " base conversion
-nnoremap <silent> <leader>dx :s/\<\d\+\>/\=printf("0x%X", str2nr(submatch(0)))<CR>:nohlsearch<CR>
-nnoremap <silent> <leader>db :s/\<\d\+\>/\=printf("0b%b", str2nr(submatch(0)))<CR>:nohlsearch<CR>
-nnoremap <silent> <leader>hx :s/\<0x\x\+\>/\=str2nr(submatch(0), 16)<CR>:nohlsearch<CR>
-nnoremap <silent> <leader>bx :s/\<0b[01]\+\>/\=str2nr(submatch(0), 2)<CR>:nohlsearch<CR>
+" nnoremap <silent> <leader>dx :s/\<\d\+\>/\=printf("0x%X", str2nr(submatch(0)))<CR>:nohlsearch<CR>
+" nnoremap <silent> <leader>db :s/\<\d\+\>/\=printf("0b%b", str2nr(submatch(0)))<CR>:nohlsearch<CR>
+" nnoremap <silent> <leader>hx :s/\<0x\x\+\>/\=str2nr(submatch(0), 16)<CR>:nohlsearch<CR>
+" nnoremap <silent> <leader>bx :s/\<0b[01]\+\>/\=str2nr(submatch(0), 2)<CR>:nohlsearch<CR>
 
-vnoremap <silent> <leader>dx :s/\%V\d\+/\=printf("0x%X", str2nr(submatch(0)))<CR>:nohlsearch<CR>
-vnoremap <silent> <leader>db :s/\%V\d\+/\=printf("0b%b", str2nr(submatch(0)))<CR>:nohlsearch<CR>
-vnoremap <silent> <leader>hx :s/\%V0x\x\+/\=str2nr(submatch(0), 16)<CR>:nohlsearch<CR>
-vnoremap <silent> <leader>bx :s/\%V0b[01]\+/\=str2nr(submatch(0), 2)<CR>:nohlsearch<CR>
+" vnoremap <silent> <leader>dx :s/\%V\d\+/\=printf("0x%X", str2nr(submatch(0)))<CR>:nohlsearch<CR>
+" vnoremap <silent> <leader>db :s/\%V\d\+/\=printf("0b%b", str2nr(submatch(0)))<CR>:nohlsearch<CR>
+" vnoremap <silent> <leader>hx :s/\%V0x\x\+/\=str2nr(submatch(0), 16)<CR>:nohlsearch<CR>
+" vnoremap <silent> <leader>bx :s/\%V0b[01]\+/\=str2nr(submatch(0), 2)<CR>:nohlsearch<CR>
 
 " create split
 nnoremap <leader>sv :vsplit<CR>
@@ -199,3 +201,25 @@ noremap <S-Right> :vertical resize +1<CR>
 noremap <S-Up> :resize -1<CR>
 noremap <S-Down> :resize +1<CR>
 
+" code diagnostics
+" Use `:CocDiagnostics` to get all diagnostics of current buffer
+nmap <silent> <leader>gp <Plug>(coc-diagnostic-prev)
+nmap <silent> <leader>gn <Plug>(coc-diagnostic-next)
+
+" code navigation
+nmap <silent> <leader>gd <Plug>(coc-definition)
+nmap <silent> <leader>gt <Plug>(coc-type-definition)
+nmap <silent> <leader>gi <Plug>(coc-implementation)
+nmap <silent> <leader>gr <Plug>(coc-references)
+
+" Symbol renaming
+nmap <leader>rn <Plug>(coc-rename)
+
+" Formatting selected code
+xmap <leader>fmt  <Plug>(coc-format-selected)
+nmap <leader>fmt  <Plug>(coc-format-selected)
+
+" code actions
+nmap <leader>ac  <Plug>(coc-codeaction-cursor)
+nmap <leader>as  <Plug>(coc-codeaction-source)
+nmap <leader>qf  <Plug>(coc-fix-current)
