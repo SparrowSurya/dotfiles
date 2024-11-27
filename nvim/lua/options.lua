@@ -21,7 +21,7 @@ vim.o.textwidth = 72
 vim.o.wrap = true
 
 -- colors
-vim.o.termguicolors = tr
+vim.o.termguicolors = true
 
 -- shell
 vim.o.shell = vim.env.SHELL or vim.fn.expand("$SHELL")
