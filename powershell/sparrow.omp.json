@@ -1,20 +1,21 @@
 {
   "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
-  "version": 2,
+  "transient_prompt": {
+    "template": "\ue285 ",
+    "foreground": "#FFFFF0",
+    "background": "transparent"
+  },
   "console_title_template": "{{ .UserName }}",
-  "final_space": true,
   "blocks": [
     {
       "type": "prompt",
-      "newline": true,
       "alignment": "left",
       "segments": [
         {
-          "background": "#24273a",
-          "foreground": "#7dc4e4",
           "properties": {
             "alpine": "\uf300",
             "arch": "\uf303",
+            "cache_duration": "none",
             "centos": "\uf304",
             "debian": "\uf306",
             "elementary": "\uf309",
@@ -29,143 +30,160 @@
             "ubuntu": "\uf31c",
             "windows": "\ue70f"
           },
-          "style": "diamond",
-          "template": "<#24273a,#1e1e2e></>{{ .Icon }} ",
-          "type": "os"
-        },
-        {
+          "template": "<#24273a,#1e1e2e>\ue0b6</>{{ .Icon }} ",
+          "foreground": "#7dc4e4",
           "background": "#24273a",
-          "foreground": "#b7bdf8",
-          "style": "diamond",
-          "trailing_diamond": "<#24273a></>",
-          "template": " {{ .UserName }} ",
-          "type": "session"
+          "type": "os",
+          "style": "diamond"
         },
         {
-          "foreground": "#242424",
-          "background": "#2ac3de",
-          "style": "diamond",
-          "leading_diamond": "<#2ac3de></>",
           "properties": {
-            "home_icon": " ",
-            "folder_icon": "",
+            "cache_duration": "none"
+          },
+          "trailing_diamond": "<#24273a>\ue0b0</>",
+          "template": " {{ .UserName }} ",
+          "foreground": "#b7bdf8",
+          "background": "#24273a",
+          "type": "session",
+          "style": "diamond"
+        },
+        {
+          "properties": {
+            "cache_duration": "none",
+            "folder_icon": "\ue5ff",
             "folder_separator_icon": "/",
+            "home_icon": "\uf015 ",
             "style": "folder"
           },
-          "template": "{{ .Path }} ",
-          "type": "path"
+          "template": " {{ .Path }} ",
+          "foreground": "#242424",
+          "background": "#89b4fa",
+          "trailing_diamond": "\ue0b0",
+          "type": "path",
+          "style": "diamond"
         },
         {
-          "type": "git",
-          "background": "#c6a0f6",
-          "foreground": "#24273a",
-          "style": "diamond",
-          "leading_diamond": "<#2ac3de></>",
-          "template": " {{ .HEAD }} ",
           "properties": {
-            "branch_icon": " ",
+            "branch_icon": "\uea84 ",
+            "cache_duration": "none",
             "fetch_stash_count": true,
             "fetch_status": true,
             "fetch_upstream_icon": true,
             "fetch_worktree_count": true
-          }
+          },
+          "template": " {{ .HEAD }} ",
+          "foreground": "#24273a",
+          "background": "#c6a0f6",
+          "trailing_diamond": "\ue0b0",
+          "type": "git",
+          "style": "diamond"
         },
         {
-          "type": "python",
-          "foreground": "#242424",
-          "background": "#ee99a0",
-          "template": " Venv ",
-          "style": "diamond",
-          "leading_diamond": "<#c6a0f6></>"
-        },
-        {
-          "background": "#f5bde6",
-          "foreground": "#242424",
-          "style": "diamond",
-          "leading_diamond": "<#ee99a0></>",
-          "trailing_diamond": "",
           "properties": {
+            "cache_duration": "none"
+          },
+          "template": " venv ",
+          "foreground": "#242424",
+          "background": "#f5c2e7",
+          "trailing_diamond": "\ue0b0",
+          "type": "python",
+          "style": "diamond"
+        },
+        {
+          "properties": {
+            "cache_duration": "none",
             "time_format": "3:04 PM"
           },
-          "template": "  {{ .CurrentDate | date .Format }} ",
-          "type": "time"
-        }
-      ]
-    },
-    {
-      "alignment": "right",
-      "segments": [
-        {
-          "foreground": "#b7bdf8",
-          "background": "#24273a",
-          "style": "diamond",
-          "leading_diamond": " ",
-          "trailing_diamond": "",
-          "properties": {
-            "style": "austin",
-            "threshold": 0
-          },
-          "template": " {{ .FormattedMs }} ",
-          "type": "executiontime"
-        },
-        {
-          "background": "#24273a",
-          "style": "diamond",
-          "leading_diamond": " ",
-          "trailing_diamond": "",
-          "type": "battery",
-          "foreground_templates": [
-            "{{ if eq \"Charging\" .State.String }} #a6da95 {{ end }}",
-            "{{ if eq \"Discharging\" .State.String }} #ee99a0 {{ end }}",
-            "{{ if eq \"Full\" .State.String }} #91d7e3 {{ end }}"
-          ],
-          "template": " {{ if not .Error }}{{ .Icon }} {{ .Percentage }}%{{ end }} ",
-          "properties": {
-            "discharging_icon": "󰁾",
-            "charging_icon": "󰂄",
-            "charged_icon": "󰁹"
-          }
-        },
-        {
-          "foreground": "#b7bdf8",
-          "background": "#24273a",
-          "style": "diamond",
-          "leading_diamond": " ",
-          "trailing_diamond": "",
-          "template": " CPU: {{ round .PhysicalPercentUsed .Precision }}% ",
-          "type": "sysinfo"
-        },
-        {
-          "foreground": "#b7bdf8",
-          "background": "#24273a",
-          "style": "diamond",
-          "leading_diamond": " ",
-          "trailing_diamond": "",
-          "template": " RAM: {{ round .PhysicalPercentUsed .Precision }}% ",
-          "type": "sysinfo"
+          "trailing_diamond": "\ue0b4",
+          "template": " \uf017 {{ .CurrentDate | date .Format }} ",
+          "foreground": "#242424",
+          "background": "#f9e2af",
+          "type": "time",
+          "style": "diamond"
         }
       ],
-      "type": "prompt"
+      "newline": true
     },
     {
       "type": "prompt",
-      "newline": true,
+      "alignment": "right",
+      "segments": [
+        {
+          "properties": {
+            "cache_duration": "none",
+            "style": "austin",
+            "threshold": 0
+          },
+          "leading_diamond": " \ue0b6",
+          "trailing_diamond": "\ue0b4",
+          "template": " {{ .FormattedMs }} ",
+          "foreground": "#b7bdf8",
+          "background": "#24273a",
+          "type": "executiontime",
+          "style": "diamond"
+        },
+        {
+          "properties": {
+            "cache_duration": "none",
+            "charged_icon": "\udb80\udc79",
+            "charging_icon": "\udb80\udc84",
+            "discharging_icon": "\udb80\udc7e"
+          },
+          "leading_diamond": " \ue0b6",
+          "trailing_diamond": "\ue0b4",
+          "template": " {{ if not .Error }}{{ .Icon }} {{ .Percentage }}%{{ end }} ",
+          "background": "#24273a",
+          "type": "battery",
+          "style": "diamond",
+          "foreground_templates": [
+            "{{ if eq \"Charging\" .State.String }} #a6da95 {{ end }}",
+            "{{ if eq \"Discharging\" .State.String }} #f5c2e7 {{ end }}",
+            "{{ if eq \"Full\" .State.String }} #91d7e3 {{ end }}"
+          ]
+        },
+        {
+          "properties": {
+            "cache_duration": "none"
+          },
+          "leading_diamond": " \ue0b6",
+          "trailing_diamond": "\ue0b4",
+          "template": " CPU: {{ round .PhysicalPercentUsed .Precision }}% ",
+          "foreground": "#b7bdf8",
+          "background": "#24273a",
+          "type": "sysinfo",
+          "style": "diamond"
+        },
+        {
+          "properties": {
+            "cache_duration": "none"
+          },
+          "leading_diamond": " \ue0b6",
+          "trailing_diamond": "\ue0b4",
+          "template": " RAM: {{ round .PhysicalPercentUsed .Precision }}% ",
+          "foreground": "#b7bdf8",
+          "background": "#24273a",
+          "type": "sysinfo",
+          "style": "diamond"
+        }
+      ]
+    },
+    {
+      "type": "prompt",
       "alignment": "left",
       "segments": [
         {
-          "style": "diamond",
-          "template": "{{ if gt .Code 0 }} <#ed8796></> {{ else }} <#a6da95></#> {{end}}",
           "properties": {
-            "always_enabled": true
+            "always_enabled": true,
+            "cache_duration": "none"
           },
-          "type": "exit"
+          "template": "{{ if gt .Code 0 }} <#ed8796>\uf00d</> {{ else }} <#a6da95>\uf00c</#> {{end}}",
+          "type": "exit",
+          "style": "diamond"
         }
-      ]
+      ],
+      "newline": true
     }
   ],
-  "transient_prompt": {
-    "foreground": "#FFFFF0",
-    "background": "transparent",
-    "template": " "
-  }
+  "version": 3,
+  "final_space": true
 }
