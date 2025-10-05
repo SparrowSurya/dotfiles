@@ -9,5 +9,8 @@ map("v", "<M-Up>", ":m '<-2<CR>gv=gv", { desc = "move lines up" })
 map("v", "<M-Down>", ":m '>+1<CR>gv=gv", { desc = "move lines down" })
 
 -- split window
-map("n", "<leader>h", ":split", { desc = "split window horizontally" })
-map("n", "<leader>v", ":vsplit", { desc = "split window vertically" })
+map("n", "<leader>sV", ":split<CR>", { desc = "split window horizontally" })
+map("n", "<leader>sv", ":vsplit<CR>", { desc = "split window vertically" })
+
+-- normal mode in terminal
+map("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "change to normal mode in terminal" })
