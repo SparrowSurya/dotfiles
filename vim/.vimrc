@@ -20,6 +20,7 @@ set guicursor=n-c-v:block-nCursor
 set listchars=space:.,tab:\│. " show . character to show spaces
 set list			  " render the chars list
 " set signcolumn=yes  " Always show the sign column
+set nofen             " hide those folded lines
 
 " ----------------------------------------------------------------
 " swap file
@@ -119,6 +120,9 @@ call plug#end()
 let g:airline_theme='onedark'
 " let g:airline_theme='catppuccin_mocha'
 " let g:lightline = {'colorscheme': 'catppuccin_mocha'}
+
+" buf tab line
+hi BufTabLineFill guibg=#1e1e1e
 
 " nerd tree
 nnoremap <C-n> :NERDTreeToggle<CR>
@@ -223,3 +227,19 @@ nmap <leader>fmt  <Plug>(coc-format-selected)
 nmap <leader>ac  <Plug>(coc-codeaction-cursor)
 nmap <leader>as  <Plug>(coc-codeaction-source)
 nmap <leader>qf  <Plug>(coc-fix-current)
+
+
+" ----------------------------------------------------------------
+" Transparent background
+" ----------------------------------------------------------------
+
+" Set termguicolors for true color support in modern terminals
+set termguicolors
+
+" Make the Normal highlight group's background transparent
+highlight Normal guibg=NONE ctermbg=NONE
+
+" Optionally, make other elements transparent as well
+" For example, to make NonText and SignColumn transparent:
+" highlight NonText guibg=NONE ctermbg=NONE
+" highlight SignColumn guibg=NONE ctermbg=NONE
