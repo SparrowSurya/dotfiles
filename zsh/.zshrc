@@ -8,6 +8,7 @@ alias grep="grep --color=auto"
 
 # Path
 export PATH="$PATH:$HOME/.local/bin"
+export PATH="$PATH:/opt/google/chrome"
 
 # Desktop config
 export DESKTOP_CONFIG="/var/lib/AccountsService/users/shelly"
