@@ -6,6 +6,13 @@ alias vi="vim"
 alias cls="clear"
 alias grep="grep --color=auto"
 
+# Name of terminal
+TERMINAL=""
+
+if [[ -n $(whereis fastfetch) ]]; then
+	TERMINAL=$(fastfetch | grep "Terminal" | sed 's/.*Terminal: //' | awk '{print $1}')
+fi
+
 # Path
 export PATH="$PATH:$HOME/.local/bin"
 export PATH="$PATH:/opt/google/chrome"
@@ -13,8 +20,18 @@ export PATH="$PATH:/opt/google/chrome"
 # Desktop config
 export DESKTOP_CONFIG="/var/lib/AccountsService/users/shelly"
 
+# omp theme file
+theme=""
+if [[ "$TERMINAL" == "hyper" ]]; then
+    theme="sparrow"
+elif [[ "$TERMINAL" == "kitty" ]]; then
+    theme="catppuccin_mocha"
+fi 
+
 # oh-my-posh prompt
-eval "$(oh-my-posh init zsh --config $HOME/.cache/oh-my-posh/themes/catppuccin_mocha.omp.json)"
+if [[ -n "$theme" ]]; then
+    eval "$(oh-my-posh init zsh --config $HOME/.cache/oh-my-posh/themes/"$theme".omp.json)"
+fi
 
 # nvm
 source "/usr/share/nvm/init-nvm.sh"
@@ -40,11 +57,12 @@ if [ -d /usr/share/zsh/site-functions ]; then
 fi
 
 # Enable Zsh readline emulation
-autoload -U bindkey
+# autoload -U bindkey
+unfunction bindkey 2>/dev/null; autoload -Uz compinit && compinit
 
 # Map Ctrl+Arrow to move by word
-# bindkey '^[[1;5C' forward-word   # Ctrl+Right
-# bindkey '^[[1;5D' backward-word  # Ctrl+Left
-# bindkey '^[[5C' forward-word     # optional alternate sequence
-# bindkey '^[[5D' backward-word    # optional alternate sequence
+bindkey '^[[1;5C' forward-word   # Ctrl+Right
+bindkey '^[[1;5D' backward-word  # Ctrl+Left
+bindkey '^[[5C' forward-word     # optional alternate sequence
+bindkey '^[[5D' backward-word    # optional alternate sequence
 
