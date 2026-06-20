@@ -10,7 +10,7 @@ alias grep="grep --color=auto"
 TERMINAL=""
 
 if [[ -n $(whereis fastfetch) ]]; then
-	TERMINAL=$(fastfetch | grep "Terminal" | sed 's/.*Terminal: //' | awk '{print $1}')
+	TERMINAL=$(fastfetch | grep "Terminal:" | sed 's/.*Terminal: //' | awk '{print $1}')
 fi
 
 # Path
@@ -25,6 +25,8 @@ theme=""
 if [[ "$TERMINAL" == "hyper" ]]; then
     theme="sparrow"
 elif [[ "$TERMINAL" == "kitty" ]]; then
+    theme="catppuccin_mocha"
+else
     theme="catppuccin_mocha"
 fi 
 
