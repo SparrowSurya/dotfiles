@@ -1,10 +1,4 @@
-# commands
-alias ls="ls --color=always"
-alias la="ls -a"
-alias ll="ls -l"
-alias vi="vim"
-alias cls="clear"
-alias grep="grep --color=auto"
+#!/usr/zsh
 
 # Name of terminal
 TERMINAL=""
@@ -13,6 +7,14 @@ if [[ -n $(whereis fastfetch) ]]; then
 	TERMINAL=$(fastfetch | grep "Terminal:" | sed 's/.*Terminal: //' | awk '{print $1}')
 fi
 
+# commands
+alias ls="ls --color=always"
+alias la="ls -a"
+alias ll="ls -l"
+alias vi="vim"
+alias cls="clear"
+alias grep="grep --color=auto"
+
 # Path
 export PATH="$PATH:$HOME/.local/bin"
 export PATH="$PATH:/opt/google/chrome"
@@ -20,14 +22,30 @@ export PATH="$PATH:/opt/google/chrome"
 # Desktop config
 export DESKTOP_CONFIG="/var/lib/AccountsService/users/shelly"
 
+# Prevent Zsh / Oh My Posh from setting the terminal window title to hostname
+export DISABLE_AUTO_TITLE="true"
+
+# Maxoage color custominzation
+export LESS_TERMCAP_mb=$'\e[0m'
+export LESS_TERMCAP_md=$'\e[1;38;2;243;139;168m'
+export LESS_TERMCAP_me=$'\e[0m'
+export LESS_TERMCAP_se=$'\e[0m'
+export LESS_TERMCAP_so=$'\e[48;2;49;50;68;38;2;205;214;244m'
+export LESS_TERMCAP_ue=$'\e[0m'
+export LESS_TERMCAP_us=$'\e[4;38;2;203;166;247m'
+
 # omp theme file
 theme=""
-if [[ "$TERMINAL" == "hyper" ]]; then
-    theme="sparrow"
-elif [[ "$TERMINAL" == "kitty" ]]; then
-    theme="catppuccin_mocha"
+if [[ -n "$TMUX" ]]; then
+    theme="sparrow-catppuccin-mocha"
 else
-    theme="catppuccin_mocha"
+    if [[ "$TERMINAL" == "hyper" ]]; then
+        theme="sparrow"
+    elif [[ "$TERMINAL" == "kitty" ]]; then
+        theme="sparrow-catppuccin-mocha"
+    else
+        theme="sparrow-catppuccin-mocha"
+    fi 
 fi 
 
 # oh-my-posh prompt
@@ -36,7 +54,10 @@ if [[ -n "$theme" ]]; then
 fi
 
 # nvm
-source "/usr/share/nvm/init-nvm.sh"
+nvm_init="/usr/share/nvm/init-nvm.sh"
+if [[ -f "$nvm_init" ]]; then
+    source "$nvm_init"
+fi
 
 # Git
 ssh-add -D &> /dev/null
